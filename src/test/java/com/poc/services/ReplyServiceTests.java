@@ -3,17 +3,15 @@ package com.poc.services;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-// import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.when;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-// import org.mockito.MockedStatic;
+import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
-// import org.mockito.Matchers;
-// import org.mockito.Mockito;
 
 import com.poc.dto.ReplyDto;
 import com.poc.models.Reply;
@@ -50,9 +48,9 @@ public class ReplyServiceTests {
 		Reply reply = reply();
 		ReplyDto replyDto = replyDto();
 		when(replyRepository.findAll()).thenReturn(Flux.just(reply));
-		try (MockedStatic<AppUtils> utilities = Mockito.mockStatic(AppUtils.class)) {
-			utilities.when(() -> AppUtils.entityToDto(reply)).thenReturn(replyDto);
-		}
+// 		try (MockedStatic<AppUtils> utilities = Mockito.mockStatic(AppUtils.class)) {
+// 			utilities.when(() -> AppUtils.entityToDto(reply)).thenReturn(replyDto);
+// 		}
 		Flux<ReplyDto> resultFlux = replyService.getReplyByCommentId(Constants.ELEMENT_ID, Constants.COMMENT_ID);
 		assertEquals(true, resultFlux.toString().contains("FluxMapFuseable"));
 		assertNotNull(resultFlux);
